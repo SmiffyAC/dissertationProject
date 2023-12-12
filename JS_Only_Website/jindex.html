@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!--    AUTO REFRESH-->
+    <meta http-equiv="refresh" content="5">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Only Website</title>
+    <style>
+        body {
+            background: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 3em;
+            padding: 50px;
+        }
+        .container {
+            background-color: white;
+            box-shadow: 0 0 60px rgba(128, 0, 128, 0.9);
+            border-radius: 10px;
+            margin: 20px auto;
+            padding: 20px;
+            width: 80%;
+        }
+        .navbar {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            border-radius: 30px;
+            /*box-shadow: 0px 0px 5px rgba(128, 0, 128, 0.9);*/
+        }
+        .navbar a {
+            flex: 1;
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 10px 12px; /* Reduced padding */
+            text-decoration: none;
+            margin: 5px;
+            background-color: white;
+            color: black;
+            border: 2px solid black;
+            border-radius: 20px;
+            box-shadow: 0px 0px 3px black;
+            /*border: 2px solid transparent;*/
+        }
+        .navbar a:hover {
+            background: white;
+            color: black;
+            border: 2px solid black;
+            box-shadow: 0px 0px 10px rgba(128, 0, 128, 0.9);
+        }
+        p {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.6em;
+            padding-top: 10px;
+            border-top: 2px solid black;
+            margin-top: 200px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>JS Only Website</h1>
+</div>
+<div class="container">
+    <div class="navbar">
+        <a href="javascript:task1();">Task 1: Maths</a>
+        <a href="javascript:task2();">Task 2: Hashing</a>
+        <a href="javascript:task3();">Task 3: Primes</a>
+        <a href="javascript:task4();">Task 4: Placehldr</a>
+        <a href="javascript:task5();">Task 5: Placehldr</a>
+    </div>
+    <p>This website is built using only HTML, JS, and CSS.</p>
+    <p>The purpose of this website is to demonstrate the capabilities of JS.</p>
+    <p>Each of the complex tasks are completed using only JS functions.</p>
+</div>
+<script>
+    function task1() {
+        let startTime = Date.now();
+        let sum = 0;
+        for (let i = 0; i < 1000000; i++) {
+            let randomNumber = Math.floor(Math.random() * 101); // generates random number between 0 and 100
+            sum += randomNumber;
+        }
+        let endTime = Date.now();
+        let timeTaken = endTime - startTime; // time taken in milliseconds
+        alert(` Time taken: ${timeTaken}ms\n The sum of 1000000 random numbers between 0 and 100 is: ${sum}.`);
+    }
+
+    async function task2() {
+        const hash = await sha256('hello world');
+        alert(`The SHA-256 hash of 'hello world' is: ${hash}`);
+    }
+    async function sha256(message) {
+        const msgUint8 = new TextEncoder().encode(message);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        return hashHex;
+    }
+    function task3() {
+        const limit = 100000; // You can change the limit to the desired number
+        const startTime = Date.now();
+        const primes = sieveOfEratosthenes(limit);
+        const endTime = Date.now();
+        const timeTaken = endTime - startTime;
+        alert(`Time taken: ${timeTaken}ms \nPrime numbers up to ${limit}:\n ${primes.join(', ')}`);
+    }
+
+    function sieveOfEratosthenes(limit) {
+        const primes = [];
+        const isPrime = new Array(limit + 1).fill(true);
+        isPrime[0] = isPrime[1] = false;
+
+        for (let num = 2; num <= limit; num++) {
+            if (isPrime[num]) {
+                primes.push(num);
+                for (let multiple = num * num; multiple <= limit; multiple += num) {
+                    isPrime[multiple] = false;
+                }
+            }
+        }
+
+        return primes;
+    }
+
+
+    function task4() {
+        alert("Running Task 4");
+    }
+    function task5() {
+        alert("Running Task 5");
+    }
+</script>
+
+<footer>
+    <p>Author: Aaron Smith | StudentID: 100536235</p>
+</footer>
+</body>
+</html>
