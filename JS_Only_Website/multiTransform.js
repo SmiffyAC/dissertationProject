@@ -135,8 +135,19 @@ function applyImageProcessing() {
 }
 
 window.onload = function() {
+    const originalCanvas = document.getElementById('originalCanvas');
+    const imageCanvas = document.getElementById('imageCanvas');
+    const context = imageCanvas.getContext('2d');
+    const originalContext = originalCanvas.getContext('2d');
     const image = document.getElementById('sourceImage');
+
     if (image.complete) {
+        // Set canvas sizes
+        originalCanvas.width = imageCanvas.width = image.width;
+        originalCanvas.height = imageCanvas.height = image.height;
+
+        // Draw the original image
+        originalContext.drawImage(image, 0, 0);
         applyImageProcessing();
     } else {
         image.onload = applyImageProcessing;
